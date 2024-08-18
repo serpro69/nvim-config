@@ -4,7 +4,7 @@ local formatters_by_ft = {
   cpp = { "clang_format" },
   c = { "clang_format" },
   go = { "gofumpt" },
-  cs = { "csharpier" },
+  -- cs = { "csharpier" },
   yaml = { "yamlfmt" },
   css = { "prettier" },
   flow = { "prettier" },
@@ -16,6 +16,7 @@ local formatters_by_ft = {
   less = { "prettier" },
   markdown = { "prettier" },
   scss = { "prettier" },
+  tf = { "tflint", "trivy" },
   typescript = { "prettier" },
   typescriptreact = { "prettier" },
   vue = { "prettier" },
@@ -30,11 +31,12 @@ return {
     -- format_after_save = {
     --   async = true,
     -- },
-    -- format_on_save = {
-    --   -- These options will be passed to conform.format()
-    --   quiet = true,
-    --   lsp_fallback = true,
-    -- },
+    format_on_save = {
+      -- These options will be passed to conform.format()
+      timeout_ms = 500,
+      quiet = true,
+      lsp_fallback = true,
+    },
     formatters_by_ft = formatters_by_ft,
   },
 }

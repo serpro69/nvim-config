@@ -132,7 +132,10 @@ M.ui = {
         elseif theme == "vscode" or theme == "vscode_colored" then
           return "%#StText# %L"
         end
-        return gen_block("", "%L", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
+        -- return gen_block("", "%L", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
+        -- for nvchad/ui minimal 'cursor' module see:
+        -- https://github.com/NvChad/ui/blob/967d8b27811f3b2a2ac3fd2de27e5a4992dc0770/lua/nvchad/stl/minimal.lua#L64
+        return gen_block("", "%L|%l/%c", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
       end,
 
       harpoon = function()
@@ -236,9 +239,9 @@ M.ui = {
       blank = function()
         return "%#Normal#" .. "%=" -- empty space
       end,
-      -- custom_btns = function()
-      --   return " %#Normal#%@v:lua.ClickGit@  %#Normal#%@v:lua.RunCode@  %#Normal#%@v:lua.ClickSplit@  "
-      -- end,
+      custom_btns = function()
+        return " %#Normal#%@v:lua.ClickGit@  %#Normal#%@v:lua.RunCode@  %#Normal#%@v:lua.ClickSplit@  "
+      end,
     },
   },
 }
@@ -268,15 +271,29 @@ M.mason = {
     "vim-language-server",
     "stylua",
 
+    -- IaC, DevXp, DevOps
+    "ansible-language-server",
+    "ansible-lint",
+    "dockerfile-language-server",
+    "docker-compose-language-service",
+    "terraform-ls",
+    "tflint",
+    -- "tfsec", -- replaced by trivy
+    "trivy",
+
     -- Web Development
-    -- "css-lsp",
-    -- "html-lsp",
-    -- "typescript-language-server",
+    "css-lsp",
+    "html-lsp",
+    "typescript-language-server",
     -- "deno",
     -- "vue-language-server",
     -- "tailwindcss-language-server",
     -- "emmet_language_server",
     -- "eslint-lsp",
+    -- "prettier",
+
+    -- Markdown / Notes
+    "marksman",
 
     -- PHP
     -- "intelephense",
@@ -292,13 +309,18 @@ M.mason = {
     -- "jdtls",
 
     -- Yaml
-    -- "yaml-language-server",
+    "yaml-language-server",
 
     -- Python
     -- "basedpyright",
 
     -- Go
-    -- "gopls",
+    "delve",
+    "goimports",
+    "goimports-reviser",
+    "golangci-lint",
+    "golangci-lint-langserver",
+    "gopls",
 
     -- C#
     -- "omnisharp",
@@ -306,6 +328,7 @@ M.mason = {
   },
 }
 
+-- Disable signature help because it conflicts with folke/noice.nvim plugin
 M.lsp = { signature = false }
 
 M.base46 = {
