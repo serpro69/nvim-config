@@ -87,7 +87,10 @@ M.modules = {
     elseif theme == "vscode" or theme == "vscode_colored" then
       return "%#StText# %L"
     end
-    return gen_block("", "%L", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
+    -- return gen_block("", "%L", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
+    -- for nvchad/ui minimal 'cursor' module see:
+    -- https://github.com/NvChad/ui/blob/967d8b27811f3b2a2ac3fd2de27e5a4992dc0770/lua/nvchad/stl/minimal.lua#L64
+    return gen_block("", "%L|%l/%c", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
   end,
 
   harpoon = function()
