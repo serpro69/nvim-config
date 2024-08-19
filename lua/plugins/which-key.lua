@@ -27,6 +27,7 @@ return {
         { "<leader>f", group = "Find", icon = "" },
         { "<leader>g", group = "Git", icon = "󰊢" },
         { "<leader>h", group = "Harpoon", icon = "" },
+        { "<leader>j", group = "Flash", icon = "󰉁" },
         { "<leader>l", group = "LSP", icon = "" },
         { "<leader>n", group = "Neovim", icon = "" },
         { "<leader>o", group = "Options", icon = "" },
