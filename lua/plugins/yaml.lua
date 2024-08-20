@@ -2,7 +2,7 @@
 -- NOTE: Language
 return {
   "cuducos/yaml.nvim",
-  ft = { "yaml", "yaml.ansible" }, -- optional
+  ft = { "yaml", "yaml.ansible", "yaml.ghaction" }, -- optional
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope.nvim", -- optional
