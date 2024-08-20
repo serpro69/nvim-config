@@ -1,4 +1,5 @@
 return {
+  filetypes = { "yaml", "yaml.ansible", "yaml.ghaction" },
   settings = {
     yaml = {
       schemaStore = {
