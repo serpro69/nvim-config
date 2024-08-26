@@ -25,7 +25,9 @@ return {
     -- end, { desc = "Toggle Flash Search" })
   end,
   opts = {
-    labels = "asdfghjklqwertyuiopzxcvbnm",
+    -- exclude common vim keys: r, i, p, x, c
+    -- labels = "asdfghjklqwertyuiopzxcvbnm",
+    labels = "asdfghjklqwetyuzvbnm",
     search = {
       -- search/jump in all windows
       multi_window = true,
