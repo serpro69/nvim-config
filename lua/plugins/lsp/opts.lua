@@ -16,6 +16,13 @@ M.lsp_keymaps = function(bufnr)
   keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", { buffer = bufnr, silent = true })
   keymap("n", "gI", "<cmd>Telescope lsp_implementations<cr>", { buffer = bufnr, silent = true })
   keymap("v", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP | Code Action", silent = true })
+
+  -- NOTE: own mappings (ref https://github.com/serpro69/nvim-config/commit/bbe9824da9fe024f6fc460520ec5e618740a888e)
+  keymap("n", "gD", vim.lsp.buf.declaration, { desc = "LSP | GoTo declaration", buffer = bufnr, silent = true })
+  keymap("n", "<leader>lD", "<cmd>Lspsaga finder<cr>", { buffer = bufnr, silent = true })
+  keymap("n", "<leader>ld", "<cmd>Lspsaga goto_definition<cr>", { buffer = bufnr, silent = true })
+  keymap("n", "gd", vim.lsp.buf.definition, { desc = "LSP | GoTo definition", buffer = bufnr, silent = true })
+  --
 end
 
 -- Highlight symbol under cursor
