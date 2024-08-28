@@ -93,6 +93,149 @@ return {
       },
     },
     {
+      "zbirenbaum/copilot.lua", -- AI programming
+      enabled = false, -- currently only used for auth to generate a token for codecompanion plugin
+      event = "InsertEnter",
+      init = function()
+        require("legendary").commands {
+          itemgroup = "Copilot",
+          commands = {
+            {
+              ":CopilotToggle",
+              function()
+                require("copilot.suggestion").toggle_auto_trigger()
+              end,
+              description = "Toggle on/off for buffer",
+            },
+          },
+        }
+        require("legendary").keymaps {
+          itemgroup = "Copilot",
+          description = "Copilot suggestions...",
+          icon = "",
+          keymaps = {
+            {
+              "<C-a>",
+              function()
+                require("copilot.suggestion").accept()
+              end,
+              description = "Accept suggestion",
+              mode = { "i" },
+            },
+            {
+              "<C-x>",
+              function()
+                require("copilot.suggestion").dismiss()
+              end,
+              description = "Dismiss suggestion",
+              mode = { "i" },
+            },
+            {
+              "<C-\\>",
+              function()
+                require("copilot.panel").open()
+              end,
+              description = "Show Copilot panel",
+              mode = { "n", "i" },
+            },
+          },
+        }
+      end,
+      opts = {
+        panel = {
+          auto_refresh = true,
+        },
+        suggestion = {
+          auto_trigger = true, -- Suggest as we start typing
+          keymap = {
+            accept_word = "<C-l>",
+            accept_line = "<C-j>",
+          },
+        },
+      },
+    },
+    {
+      "olimorris/codecompanion.nvim",
+      enabled = true,
+      event = "User FilePost",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim", -- Optional
+        {
+          "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+          opts = {},
+        },
+      },
+      config = function()
+        require("codecompanion").setup {
+          adapters = {
+            copilot = function()
+              return require("codecompanion.adapters").extend("copilot", {})
+            end,
+          },
+          strategies = {
+            chat = {
+              adapter = "copilot",
+            },
+            inline = {
+              adapter = "copilot",
+            },
+            agent = {
+              adapter = "copilot",
+            },
+          },
+          display = {
+            chat = {
+              window = {
+                layout = "vertical", -- float|vertical|horizontal|buffer
+              },
+            },
+            inline = {
+              diff = {
+                hl_groups = {
+                  added = "DiffAdd",
+                },
+              },
+            },
+          },
+          opts = {
+            log_level = "DEBUG",
+          },
+        }
+      end,
+      init = function()
+        vim.cmd [[cab cc CodeCompanion]]
+        require("legendary").keymaps {
+          {
+            itemgroup = "CodeCompanion",
+            icon = "",
+            description = "Use the power of AI...",
+            keymaps = {
+              {
+                "<C-a>",
+                "<cmd>CodeCompanionActions<CR>",
+                description = "Open the CodeCompanion action picker",
+                mode = { "n", "v" },
+              },
+              {
+                "<LocalLeader>a",
+                "<cmd>CodeCompanionToggle<CR>",
+                description = "Open CodeCompanion chat prompt",
+                mode = { "n", "v" },
+              },
+              {
+                "ga",
+                "<cmd>CodeCompanionAdd<CR>",
+                description = "Add selected text to CodeCompanion",
+                mode = { "n", "v" },
+              },
+            },
+          },
+        }
+      end,
+    },
+    {
       "L3MON4D3/LuaSnip",
       dependencies = "rafamadriz/friendly-snippets",
       build = "make install_jsregexp",
