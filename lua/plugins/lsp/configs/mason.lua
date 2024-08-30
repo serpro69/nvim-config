@@ -29,7 +29,7 @@ return {
         ui = {
           border = vim.g.border_enabled and "rounded" or "none",
           -- Whether to automatically check for new versions when opening the :Mason window.
-          check_outdated_packages_on_open = false,
+          check_outdated_packages_on_open = true,
           icons = {
             package_pending = " ",
             package_installed = " ",
