@@ -140,7 +140,7 @@ return {
     {
       "olimorris/codecompanion.nvim",
       enabled = true,
-      event = "User FilePost",
+      event = "BufReadPost",
       dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
