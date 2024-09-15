@@ -259,6 +259,8 @@ M.nvdash = {
   },
 }
 
+M.nvdash.header = get_header "wlcm3"
+
 M.cheatsheet = { theme = "grid" } -- simple/grid
 
 M.mason = {
