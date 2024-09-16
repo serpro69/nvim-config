@@ -152,6 +152,19 @@ return {
             accept_line = "<C-j>",
           },
         },
+        filetypes = {
+          ["*"] = function()
+            if
+              -- disable for all hidden files
+              string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%..*$")
+              -- disable for terraform .tfvars
+              or string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^.*%.tfvars$")
+            then
+              return false
+            end
+            return true
+          end,
+        },
       },
     },
     {
