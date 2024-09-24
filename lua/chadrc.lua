@@ -98,6 +98,17 @@ M.mason = {
     "vim-language-server",
     "stylua",
 
+    -- IaC, DevXp, DevOps
+    "ansible-language-server",
+    "ansible-lint",
+    -- "autotools-language-server",
+    "dockerfile-language-server",
+    "docker-compose-language-service",
+    "terraform-ls",
+    "tflint",
+    -- "tfsec", -- replaced by trivy
+    "trivy",
+
     -- Web Development
     -- "css-lsp",
     -- "html-lsp",
@@ -120,6 +131,7 @@ M.mason = {
 
     -- Java
     -- "jdtls",
+    -- "kotlin-language-server",
 
     -- Yaml
     -- "yaml-language-server",
@@ -128,7 +140,13 @@ M.mason = {
     -- "basedpyright",
 
     -- Go
-    -- "gopls",
+    "delve",
+    "go-debug-adapter",
+    "goimports",
+    "goimports-reviser",
+    "golangci-lint",
+    "golangci-lint-langserver",
+    "gopls",
 
     -- C#
     -- "omnisharp",
