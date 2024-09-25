@@ -337,8 +337,8 @@ M.mason = {
 M.lsp = { signature = false }
 
 M.base46 = {
-  theme = "nightfox",
-  theme_toggle = { "nightfox", "onedark" },
+  theme = "everblush",
+  theme_toggle = { "everblush", "nightfox" },
   hl_override = highlights.override,
   hl_add = highlights.add,
   integrations = {
