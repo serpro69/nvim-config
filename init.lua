@@ -46,3 +46,5 @@ require "core.autocommands"
 require "core.filetypes"
 require "core.utils"
 require "mappings"
+
+require "serpro69.mappings"
