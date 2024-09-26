@@ -1,0 +1,22 @@
+snippet iferr If Error
+  if err != nil {
+    ${1:return err}
+  }
+
+snippet iferrv If Error with Value
+  if $1err := $2; err != nil {
+    ${3:return err}
+  }$4
+
+snippet test Add Test
+  func Test${1:Name}(t *testing.T) {
+    // arrange
+    ${2:arrange}
+
+    ${3://act}
+
+    ${4://assert}
+  }
+
+snippet val Declare Value
+  ${1:name} := ${2:value}
