@@ -297,6 +297,7 @@ M.mason = {
 
     -- Markdown / Notes
     "marksman",
+    "markdownlint",
 
     -- PHP
     -- "intelephense",
@@ -320,7 +321,6 @@ M.mason = {
 
     -- Go
     "delve",
-    "go-debug-adapter",
     "goimports",
     "goimports-reviser",
     "golangci-lint",
