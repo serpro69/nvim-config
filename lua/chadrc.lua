@@ -118,6 +118,11 @@ M.mason = {
     -- "tailwindcss-language-server",
     -- "emmet_language_server",
     -- "eslint-lsp",
+    -- "prettier",
+
+    -- Markdown / Notes
+    "marksman",
+    "markdownlint",
 
     -- PHP
     -- "intelephense",
@@ -141,7 +146,6 @@ M.mason = {
 
     -- Go
     "delve",
-    "go-debug-adapter",
     "goimports",
     "goimports-reviser",
     "golangci-lint",
