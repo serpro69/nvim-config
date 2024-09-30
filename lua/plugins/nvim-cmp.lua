@@ -154,11 +154,26 @@ return {
         },
         filetypes = {
           ["*"] = function()
+            local cwd = vim.loop.cwd()
+            local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+            local filepath = vim.api.nvim_buf_get_name(0)
+
+            local dir_match = function(dirs)
+              for _, dir in ipairs(dirs) do
+                if cwd:match(dir) ~= nil then
+                  return true
+                end
+              end
+              return false
+            end
+
             if
+              -- disable for certain projets
+              dir_match { "evergreen%-dissemination", "norsk" }
               -- disable for all hidden files
-              string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%..*$")
+              or filename:match "^%."
               -- disable for terraform .tfvars
-              or string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^.*%.tfvars$")
+              or filepath:match "%.tfvars$"
             then
               return false
             end
