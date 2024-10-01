@@ -84,7 +84,26 @@ M.nvdash = {
   },
 }
 
+-- Override some Nvdash defaults
+-- own header
 M.nvdash.header = get_header "wlcm3"
+-- extra buttons
+local extraButtons = {
+  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+  {
+    txt = function()
+      local stats = require("lazy").stats()
+      local ms = math.floor(stats.startuptime) .. " ms"
+      return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+    end,
+    hl = "NvDashLazy",
+    no_gap = true,
+  },
+  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+}
+for _, button in ipairs(extraButtons) do
+  table.insert(M.nvdash.buttons, button)
+end
 
 M.cheatsheet = { theme = "grid" } -- simple/grid
 
@@ -235,6 +254,13 @@ M.base46.hl_add = {
   ["@markup.quote.markdown"] = { bg = "NONE" },
   ["@markup.raw.block.markdown"] = { link = "MarkviewLayer2" },
   ["@number.luadoc"] = { fg = "Comment" },
+}
+
+M.colorify = {
+  enabled = true,
+  mode = "virtual",
+  virt_text = "󱓻 ",
+  highlight = { hex = true, lspvars = true },
 }
 
 return M
