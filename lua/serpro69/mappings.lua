@@ -23,3 +23,37 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "<leader>cs", "<cmd><CR>", { desc = "General | Clear Statusline" })
+
+--- Options
+
+-- NvChad
+vim.keymap.set("n", "<leader>ont", function()
+  require("nvchad.themes").open { style = "flat" }
+end, { desc = "NvChad | Open Theme Selector" })
+
+--NvMenu
+local serpro_menu = {
+  {
+    name = "  Lsp Actions",
+    hl = "Exblue",
+    items = "lsp",
+  },
+  { name = "separator" },
+  {
+    name = "  Color Picker",
+    hl = "Exred",
+    cmd = function()
+      require("minty.huefy").open()
+    end,
+  },
+}
+
+vim.keymap.set("n", "<leader>onm", function()
+  require("menu").open(serpro_menu)
+end, { desc = "NvChad | Open Menu" })
+
+vim.keymap.set("n", "<RightMouse>", function()
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or serpro_menu
+  require("menu").open(options, { mouse = true })
+end, { desc = "NvChad | Open Menu" })

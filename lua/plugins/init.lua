@@ -6,11 +6,7 @@ return {
     "NvChad/nvterm",
     enabled = false,
   },
-  {
-    "NvChad/ui",
-  },
-  { "nvchad/volt" },
-  {
-    "nvchad/minty",
-  },
+
+  -- overrides
+  { import = "plugins.override.ui" },
 }
