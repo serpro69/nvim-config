@@ -34,6 +34,10 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
+-- Load themes
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
 -- Load the highlights
 require("base46").load_all_highlights()
 
