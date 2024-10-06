@@ -21,6 +21,16 @@ vim.opt.runtimepath:prepend(lazypath)
 -- NOTE: lazy.nvim options
 local lazy_config = require "core.lazy"
 
+-- Set the |base46_cache| global before initializing plugins (before lazy.setup)
+-- :h nvui.base46
+-- dofile(vim.g.base46_cache .. "syntax")
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
+-- load all cache files at once instead of lazyloading them
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+  dofile(vim.g.base46_cache .. v)
+end
+
 -- NOTE: Load plugins
 require("lazy").setup({
   -- {
@@ -35,8 +45,8 @@ require("lazy").setup({
 }, lazy_config)
 
 -- Load themes
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
 
 -- Load the highlights
 require("base46").load_all_highlights()
