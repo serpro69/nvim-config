@@ -199,7 +199,14 @@ return {
         require("codecompanion").setup {
           adapters = {
             copilot = function()
-              return require("codecompanion.adapters").extend("copilot", {})
+              return require("codecompanion.adapters").extend("copilot", {
+                schema = {
+                  model = {
+                    -- https://platform.openai.com/docs/models
+                    default = "gpt-4o",
+                  },
+                },
+              })
             end,
           },
           strategies = {
