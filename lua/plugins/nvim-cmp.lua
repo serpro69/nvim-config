@@ -200,6 +200,9 @@ return {
           adapters = {
             copilot = function()
               return require("codecompanion.adapters").extend("copilot", {
+                -- suggested by @lucobellic (ref: https://github.com/olimorris/codecompanion.nvim/discussions/279) to improve responses from the copilot models
+                -- see also https://github.com/lucobellic/nvim-config/blob/d8b0e7d34652704cfba85c130663823a0200bf77/lua/plugins/completion/codecompanion.lua#L53
+                opts = { stream = false },
                 schema = {
                   model = {
                     -- https://platform.openai.com/docs/models
