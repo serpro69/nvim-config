@@ -137,8 +137,8 @@ M.mason = {
     -- "vue-language-server",
     -- "tailwindcss-language-server",
     -- "emmet_language_server",
-    -- "eslint-lsp",
-    -- "prettier",
+    "eslint-lsp",
+    "prettier",
 
     -- Markdown / Notes
     "marksman",
