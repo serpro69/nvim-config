@@ -303,6 +303,7 @@ M.mason = {
     -- "autotools-language-server",
     "dockerfile-language-server",
     "docker-compose-language-service",
+    "shellcheck",
     "terraform-ls",
     "tflint",
     -- "tfsec", -- replaced by trivy
@@ -339,6 +340,7 @@ M.mason = {
 
     -- Yaml
     "yaml-language-server",
+    "yamllint",
 
     -- Python
     -- "basedpyright",
