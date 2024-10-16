@@ -86,6 +86,7 @@ M.nvdash = {
 }
 
 -- Override some Nvdash defaults
+M.nvdash.load_on_startup = false
 -- own header
 M.nvdash.header = get_header "wlcm3"
 -- extra buttons
