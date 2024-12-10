@@ -1,6 +1,6 @@
 <div align="center">
 
-![Last commit](https://img.shields.io/github/last-commit/Alexis12119/nvim-config?style=for-the-badge&logo=git&color=000F10&logoColor=dark%20orange&labelColor=302D41)
+![Last commit](https://img.shields.io/github/last-commit/serpro69/nvim-config?style=for-the-badge&logo=git&color=000F10&logoColor=dark%20orange&labelColor=302D41)
 
 [![](https://img.shields.io/badge/Neovim-0.10+-blueviolet.svg?style=for-the-badge&color=000F10&logo=Neovim&logoColor=green&labelColor=302D41)](https://github.com/neovim/neovim)
 
@@ -55,12 +55,12 @@ Please follow these steps:
    - On Linux/MacOS:
 
      ```sh
-     bash <(curl -s https://raw.githubusercontent.com/Alexis12119/nvim-config/main/installer/install.sh)
+     bash <(curl -s https://raw.githubusercontent.com/serpro69/nvim-config/master/installer/install.sh)
      ```
 
    - On Windows (Powershell):
      ```ps1
-     Invoke-WebRequest https://raw.githubusercontent.com/Alexis12119/nvim-config/main/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+     Invoke-WebRequest https://raw.githubusercontent.com/serpro69/nvim-config/master/installer/install.ps1 -UseBasicParsing | Invoke-Expression
      ```
 
 ## ✨ Features
