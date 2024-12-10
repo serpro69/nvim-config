@@ -242,6 +242,12 @@ M.base46.hl_add = {
 local theme_customs = require("serpro69.chadrc_aux").themes_customs[M.base46.theme]
 M.base46 = theme_customs and vim.tbl_deep_extend("force", M.base46, theme_customs) or M.base46
 
+-- override base46 with own settings
+-- avoid merge conflicts when upstream changes
+-- profit
+local base46_overrides = require("serpro69.chadrc_aux").base46_overrides
+M.base46 = base46_overrides and vim.tbl_deep_extend("force", M.base46, base46_overrides) or M.base46
+
 M.colorify = {
   enabled = true,
   mode = "virtual",

@@ -59,6 +59,11 @@ M.themes_customs = {
   },
 }
 
+M.base46_overrides = {
+  theme = "eldritch", ---@diagnostic disable-line
+  theme_toggle = { "eldritch", "bearded-arc" }, ---@diagnostic disable-line
+}
+
 --- Show harpoon indicator in statusline
 local harpoon_statusline_indicator = function()
   -- inspiration from https://github.com/letieu/harpoon-lualine
