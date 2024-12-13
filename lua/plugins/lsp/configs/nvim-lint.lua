@@ -1,12 +1,12 @@
 local linters_by_ft = {
-  javascriptreact = { "eslint" },
-  javascript = { "eslint" },
+  javascriptreact = { "eslint_d" },
+  javascript = { "eslint_d" },
   markdown = { "markdownlint" },
   sh = { "shellcheck" },
   -- tf = { "tflint", "trivy" },
   -- terraform = { "tflint", "trivy" },
-  typescript = { "eslint" },
-  typescriptreact = { "eslint" },
+  typescript = { "eslint_d" },
+  typescriptreact = { "eslint_d" },
   yaml = { "yamllint" },
   -- github = { "actionlint" },
 }
