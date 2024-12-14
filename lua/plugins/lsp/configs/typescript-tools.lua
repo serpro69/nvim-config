@@ -6,6 +6,10 @@ return {
     "BufReadPost",
     "BufNewFile",
   },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "neovim/nvim-lspconfig",
+  },
   opts = {
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
@@ -19,6 +23,7 @@ return {
         includeCompletionsForModuleExports = true,
         quotePreference = "auto",
       },
+      expose_as_code_action = { "all" },
     },
   },
 }
