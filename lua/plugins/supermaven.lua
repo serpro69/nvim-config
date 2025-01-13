@@ -2,6 +2,7 @@
 -- NOTE: AI Autocomplete
 return {
   "supermaven-inc/supermaven-nvim",
+  cond = false,
   -- commit = "df3ecf7",
   -- commit = "40bde487fe31723cdd180843b182f70c6a991226",
   event = {
