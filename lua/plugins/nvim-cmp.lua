@@ -194,16 +194,29 @@ return {
                 },
               })
             end,
+            gemini = function()
+              return require("codecompanion.adapters").extend("gemini", {
+                env = {
+                  api_key = os.getenv "GEMINI_API_KEY",
+                },
+                schema = {
+                  model = {
+                    -- https://ai.google.dev/gemini-api/docs/models/experimental-models
+                    default = "gemini-2.0-pro-exp",
+                  },
+                },
+              })
+            end,
           },
           strategies = {
             chat = {
-              adapter = "copilot",
+              adapter = "gemini",
             },
             inline = {
-              adapter = "copilot",
+              adapter = "gemini",
             },
             agent = {
-              adapter = "copilot",
+              adapter = "gemini",
             },
           },
           display = {
