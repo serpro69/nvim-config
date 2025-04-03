@@ -196,13 +196,13 @@ return {
             end,
             gemini = function()
               return require("codecompanion.adapters").extend("gemini", {
-                env = {
-                  api_key = os.getenv "GEMINI_API_KEY",
-                },
+                -- env = {
+                --   api_key = os.getenv "GEMINI_API_KEY",
+                -- },
                 schema = {
                   model = {
                     -- https://ai.google.dev/gemini-api/docs/models/experimental-models
-                    default = "gemini-2.0-pro-exp",
+                    default = "gemini-2.5-pro-exp-03-25",
                   },
                 },
               })
