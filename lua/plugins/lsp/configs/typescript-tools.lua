@@ -6,6 +6,7 @@ return {
     "BufReadPost",
     "BufNewFile",
   },
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "neovim/nvim-lspconfig",
