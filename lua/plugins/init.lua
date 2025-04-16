@@ -19,7 +19,4 @@ return {
       require("base46").load_all_highlights()
     end,
   },
-
-  -- NOTE: own overrides
-  { import = "plugins.override.ui" },
 }
