@@ -85,28 +85,6 @@ M.nvdash = {
   },
 }
 
--- Override some Nvdash defaults
-M.nvdash.load_on_startup = false
--- own header
-M.nvdash.header = get_header "wlcm3"
--- extra buttons
-local extraButtons = {
-  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-  {
-    txt = function()
-      local stats = require("lazy").stats()
-      local ms = math.floor(stats.startuptime) .. " ms"
-      return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
-    end,
-    hl = "NvDashLazy",
-    no_gap = true,
-  },
-  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-}
-for _, button in ipairs(extraButtons) do
-  table.insert(M.nvdash.buttons, button)
-end
-
 M.cheatsheet = { theme = "grid" } -- simple/grid
 
 M.mason = {
@@ -207,53 +185,5 @@ M.base46 = {
 
 -- check core.mappings for table structure
 -- M.mappings = require "mappings"
-
-M.base46.hl_override = {
-  DevIconMd = { fg = "#FFFFFF", bg = "NONE" },
-  FloatTitle = { link = "FloatBorder" },
-  CmpBorder = { link = "FloatBorder" },
-  CmpDocBorder = { link = "FloatBorder" },
-  TelescopeBorder = { link = "FloatBorder" },
-  TelescopePromptBorder = { link = "FloatBorder" },
-  NeogitDiffContext = { bg = "NONE" },
-  NeogitDiffContextHighlight = { bg = "NONE" },
-  -- BUG: (types) fg accepts a table
-  TbBufOffModified = { fg = { "green", "black", 50 } }, ---@diagnostic disable-line
-  ["@comment"] = { link = "Comment" },
-  ["@keyword"] = { italic = true },
-}
-
-M.base46.hl_add = {
-  YanVisual = { bg = "lightbg" },
-  LspInfoBorder = { link = "FloatBorder" },
-  NvimTreeGitStagedIcon = { fg = "vibrant_green" },
-  St_HarpoonInactive = { link = "StText" },
-  St_HarpoonActive = { link = "St_LspHints" },
-  MarkviewLayer2 = { bg = "#171B21" },
-  MarkviewCode = { link = "MarkviewLayer2" },
-  HelpviewCode = { link = "MarkviewLayer2" },
-  HelpviewInlineCode = { link = "MarkviewInlineCode" },
-  HelpviewCodeLanguage = { link = "MarkviewCode" },
-  CodeActionSignHl = { fg = "#F9E2AF" },
-  ["@number.luadoc"] = { fg = "Comment" },
-  ["@markup.quote.markdown"] = { bg = "NONE" },
-  ["@markup.raw.block.markdown"] = { link = "MarkviewLayer2" },
-}
-
-local theme_customs = require("serpro69.chadrc_aux").themes_customs[M.base46.theme]
-M.base46 = theme_customs and vim.tbl_deep_extend("force", M.base46, theme_customs) or M.base46
-
--- override base46 with own settings
--- avoid merge conflicts when upstream changes
--- profit
-local base46_overrides = require("serpro69.chadrc_aux").base46_overrides
-M.base46 = base46_overrides and vim.tbl_deep_extend("force", M.base46, base46_overrides) or M.base46
-
-M.colorify = {
-  enabled = true,
-  mode = "virtual",
-  virt_text = "󱓻 ",
-  highlight = { hex = true, lspvars = true },
-}
 
 return M
