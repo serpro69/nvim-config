@@ -2,7 +2,7 @@ require "core.globals"
 require "core.env"
 require "options"
 
-require "core.serpro69.globals" -- override some globals with my own values
+-- require "core.serpro69.globals" -- override some globals with my own values
 
 if vim.version().minor >= 11 then
   vim.tbl_add_reverse_lookup = function(tbl)
@@ -25,26 +25,15 @@ vim.opt.runtimepath:prepend(lazypath)
 -- NOTE: lazy.nvim options
 local lazy_config = require "core.lazy"
 
--- Set the |base46_cache| global before initializing plugins (before lazy.setup)
--- :h nvui.base46
--- dofile(vim.g.base46_cache .. "syntax")
--- dofile(vim.g.base46_cache .. "defaults")
--- dofile(vim.g.base46_cache .. "statusline")
--- load all cache files at once instead of lazyloading them
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-  dofile(vim.g.base46_cache .. v)
-end
-
 -- NOTE: Load plugins
 require("lazy").setup({
-  -- {
-  --   "NvChad/NvChad",
-  --   lazy = false,
-  --   branch = "v2.5",
-  --   import = "nvchad.plugins",
-  -- },
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
 
-  { import = "serpro69.nvchad" },
   { import = "plugins" },
 }, lazy_config)
 
@@ -64,5 +53,5 @@ require "core.filetypes"
 require "core.utils"
 require "mappings"
 
-require "serpro69.mappings"
-require "core.serpro69.autocommands"
+-- require "serpro69.mappings"
+-- require "core.serpro69.autocommands"
