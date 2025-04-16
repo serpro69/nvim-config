@@ -6,11 +6,6 @@ return {
     "BufReadPost",
     "BufNewFile",
   },
-  enabled = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "neovim/nvim-lspconfig",
-  },
   opts = {
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
