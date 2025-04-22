@@ -16,7 +16,7 @@ help: ## Show this help
 update: ## Update configuration with latest upstream changes
 	git br bak_$(shell date +%F) origin/master; \
 	git pull --all; \
-	git diff upstream/main main; \
+	git diff main upstream/main; \
 	git rebase upstream/main main; \
 	git rebase main master
 
