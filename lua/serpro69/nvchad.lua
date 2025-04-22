@@ -9,6 +9,6 @@ return {
       require "options"
     end,
   },
-  { "NvChad/volt" },
-  { "NvChad/minty" },
+  { "nvzone/volt" },
+  { "nvzone/minty" },
 }
