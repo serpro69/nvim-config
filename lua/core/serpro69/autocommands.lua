@@ -47,3 +47,25 @@ autocmd("BufWritePre", {
     vim.lsp.buf.format { async = false }
   end,
 })
+
+-- Notification on macro end
+autocmd("RecordingEnter", {
+  callback = function()
+    local register = vim.fn.reg_recording()
+    if register ~= "" then
+      require("serpro69.notify").notify_macro_start(register)
+    end
+  end,
+  desc = "Notify macro start",
+})
+
+-- Notification on macro end
+autocmd("RecordingLeave", {
+  callback = function()
+    local register = vim.fn.reg_recording()
+    if register ~= "" then
+      require("serpro69.notify").notify_macro_end(register)
+    end
+  end,
+  desc = "Notify macro end",
+})

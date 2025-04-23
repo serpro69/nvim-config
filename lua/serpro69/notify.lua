@@ -94,3 +94,38 @@ vim.lsp.handlers["$/progress"] = function(_, result, ctx)
     notif_data.spinner = nil
   end
 end
+
+local M = {}
+
+-- Default settings
+M.options = {
+  message_start = "macro: ", -- Message for macro start
+  message_end = "ended: ", -- Message for macro end
+  icon_start = "🚀", -- Icon for macro start
+  icon_end = "💀", -- Icon for macro end
+}
+
+-- Format notification message with icon
+local function format_notification(icon, message)
+  return icon, message
+end
+
+-- Notification for macro start
+function M.notify_macro_start(register)
+  local icon, message = format_notification(M.options.icon_start, M.options.message_start .. register)
+  vim.notify(message, vim.log.levels.WARN, { icon = icon })
+end
+
+-- Notification for macro end
+function M.notify_macro_end(register)
+  local icon, message = format_notification(M.options.icon_end, M.options.message_end .. register)
+  vim.notify(message, vim.log.levels.WARN, { icon = icon })
+end
+
+-- Set up autocommands
+function M.setup(opts)
+  -- Merge user settings with defaults
+  M.options = vim.tbl_deep_extend("force", M.options, opts or {})
+end
+
+return M
