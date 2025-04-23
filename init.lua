@@ -3,6 +3,7 @@ require "core.env"
 require "options"
 
 require "core.serpro69.globals" -- override some globals with my own values
+require "serpro69.options" -- add/override vim options
 
 if vim.version().minor >= 11 then
   vim.tbl_add_reverse_lookup = function(tbl)
