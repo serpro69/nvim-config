@@ -29,20 +29,20 @@ return {
 
     opts.mapping = vim.tbl_extend("force", {}, opts.mapping, {
       -- You can add here new mappings.
-      ["<Tab>"] = function(fallback)
-        if require("cmp").visible() and has_words_before() then
-          require("cmp").select_next_item { behavior = require("cmp").SelectBehavior.Select }
-        else
-          fallback()
-        end
-      end,
-      ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
-        if require("cmp").visible() then
-          require("cmp").select_prev_item { behavior = require("cmp").SelectBehavior.Select }
-        else
-          fallback()
-        end
-      end),
+      -- ["<C-Tab>"] = function(fallback)
+      --   if require("cmp").visible() and has_words_before() then
+      --     require("cmp").select_next_item { behavior = require("cmp").SelectBehavior.Select }
+      --   else
+      --     fallback()
+      --   end
+      -- end,
+      -- ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
+      --   if require("cmp").visible() then
+      --     require("cmp").select_prev_item { behavior = require("cmp").SelectBehavior.Select }
+      --   else
+      --     fallback()
+      --   end
+      -- end),
     })
 
     opts.completion["completeopt"] = "menu,menuone,noselect" -- disable autoselect
