@@ -11,6 +11,12 @@ return {
     stages = "fade_in_slide_out",
     timeout = 3000,
     top_down = false,
+
+    -- make notification window non-focusable
+    -- https://github.com/rcarriga/nvim-notify/issues/319#issuecomment-2710287050
+    on_open = function(win)
+      vim.api.nvim_win_set_config(win, { focusable = false })
+    end,
   },
   config = function(_, opts)
     local base46 = require("nvconfig").base46
