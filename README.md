@@ -1,15 +1,10 @@
 <div align="center">
 
-![Last commit](https://img.shields.io/github/last-commit/serpro69/nvim-config?style=for-the-badge&logo=git&color=000F10&logoColor=dark%20orange&labelColor=302D41)
+![](https://img.shields.io/github/last-commit/serpro69/nvim-config?style=for-the-badge&logo=git&color=000F10&logoColor=dark%20orange&labelColor=302D41)
 
 [![](https://img.shields.io/badge/Neovim-0.10+-blueviolet.svg?style=for-the-badge&color=000F10&logo=Neovim&logoColor=green&labelColor=302D41)](https://github.com/neovim/neovim)
 
-
-![241129_14h36m50s_screenshot](https://github.com/user-attachments/assets/3391b51c-118b-4827-8839-e3cc20f836eb)
-
-
-![241129_14h34m39s_screenshot](https://github.com/user-attachments/assets/ab981434-29ef-4a0d-9912-38da0a7886e9)
-
+![](./docs/assets/nvdash_buffer.png)
 
 </div>
 
@@ -93,7 +88,7 @@ I appreciate the support from all the Stargazers!
 
 ### CREDITS
 
-This Neovim configuration is built upon the foundation of NvChad. Special thanks to the NvChad community and developers for their fantastic work.
+This Neovim configuration my customized fork of [Alexis12119/nvim-config](https://github.com/Alexis12119/nvim-config), which in turn is built upon the foundation of NvChad. Special thanks to the NvChad community and developers for their fantastic work.
 
 - [NvChad](https://github.com/NvChad/NvChad)
 
