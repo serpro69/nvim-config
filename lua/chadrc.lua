@@ -90,19 +90,7 @@ M.nvdash.load_on_startup = false
 -- own header
 M.nvdash.header = get_header "wlcm3"
 -- extra buttons
-local extraButtons = {
-  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-  {
-    txt = function()
-      local stats = require("lazy").stats()
-      local ms = math.floor(stats.startuptime) .. " ms"
-      return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
-    end,
-    hl = "NvDashLazy",
-    no_gap = true,
-  },
-  { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-}
+local extraButtons = {}
 for _, button in ipairs(extraButtons) do
   table.insert(M.nvdash.buttons, button)
 end
