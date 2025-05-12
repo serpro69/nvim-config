@@ -44,7 +44,7 @@ return {
         automatic_enable = {
           exclude = {
             "jdtls", -- conflicts with nvim-jdtls
-            "ts_ls", -- conflicts with typescript-tools
+            -- "ts_ls", -- conflicts with typescript-tools
           },
         },
       }
