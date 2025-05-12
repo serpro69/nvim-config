@@ -236,7 +236,7 @@ return {
                 schema = {
                   model = {
                     -- https://ai.google.dev/gemini-api/docs/models/experimental-models
-                    default = "gemini-2.5-pro-exp-03-25",
+                    default = require("serpro69.plugins_aux").ai_models.gemini.pro,
                   },
                 },
               })
