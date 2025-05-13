@@ -2,12 +2,11 @@
 local M = {}
 
 M.ai_models = {
-  -- https://ai.google.dev/gemini-api/docs/models
-  copilot = {
-    claude_sonnet = "claude-3.7-sonnet",
-    gemini_pro = "gemeni-2.5-pro",
-    gemini_flash = "gemeni-2.5-flash",
+  claude = {
+    sonnet_3_5 = "claude-3.5-sonnet",
+    sonnet_3_7 = "claude-3.7-sonnet",
   },
+  -- https://ai.google.dev/gemini-api/docs/models
   gemini = {
     flash = "gemini-2.5-flash-preview-04-17",
     pro = "gemini-2.5-pro-preview-05-06",
