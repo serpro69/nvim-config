@@ -44,6 +44,7 @@ M.ui = {
       "file",
       "git",
       "%=",
+      "pomo_timer",
       "lsp_msg",
       "python_venv",
       "diagnostics",
@@ -52,7 +53,7 @@ M.ui = {
       "cwd",
       "total_lines",
     },
-    modules = require("core.statusline").modules,
+    modules = vim.tbl_deep_extend("force", require("core.statusline").modules, require("serpro69.chadrc_aux").modules),
   },
 
   tabufline = {
@@ -86,7 +87,7 @@ M.nvdash = {
 }
 
 -- Override some Nvdash defaults
-M.nvdash.load_on_startup = true
+M.nvdash.load_on_startup = false
 -- own header
 M.nvdash.header = get_header "wlcm3"
 -- extra buttons
