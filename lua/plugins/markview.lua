@@ -5,6 +5,7 @@ return {
   lazy = false,
   opts = {
     preview = {
+      enable = false,
       filetypes = { "markdown", "Avante" },
       ignore_buftypes = {},
     },
