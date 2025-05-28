@@ -136,6 +136,9 @@ M.mason = {
     "marksman",
     "markdownlint",
 
+    -- Nix
+    "nil",
+
     -- PHP
     -- "intelephense",
 
