@@ -1,6 +1,14 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  desc = "Workaround for redhat-developer/yaml-language-server/issues/990",
+  pattern = { "mkdocs.yml", "mkdocs.yaml" },
+  callback = function()
+    vim.diagnostic.enable(false, { bufnr = vim.api.nvim_get_current_buf() })
+  end,
+})
+
 autocmd("FileType", {
   desc = "Workaround for NvMenu being below NvimTree.",
   pattern = "NvMenu",
