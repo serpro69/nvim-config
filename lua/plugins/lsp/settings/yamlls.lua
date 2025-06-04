@@ -7,7 +7,11 @@ return {
         -- this plugin and its advanced options like `ignore`.
         enable = false,
       },
-      schemas = require("schemastore").yaml.schemas(),
+      schemas = vim.tbl_deep_extend(
+        "force",
+        require("schemastore").yaml.schemas(),
+        { kubernetes = { "*.yml", "*.yaml" } }
+      ),
     },
   },
 }
