@@ -9,7 +9,7 @@ return {
     enabled = true,
     notify = false, -- get a notification when changes are found
   },
-  lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json",
+  lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json",
   diff = {
     cmd = "diffview.nvim",
   },
