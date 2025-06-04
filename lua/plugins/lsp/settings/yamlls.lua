@@ -10,7 +10,7 @@ return {
       schemas = vim.tbl_deep_extend(
         "force",
         require("schemastore").yaml.schemas(),
-        { kubernetes = { "*.yml", "*.yaml" } }
+        { kubernetes = { "*.k8s.yml", "*.k8s.yaml" } }
       ),
     },
   },
