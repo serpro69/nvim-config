@@ -1,7 +1,7 @@
 .ONESHELL:
 .SHELL := /usr/bin/env bash
 .SHELLFLAGS := -ec
-.PHONY: help update
+.PHONY: help update upgrade
 
 # check for uncommitted changes before proceeding
 ifneq ($(filter help,$(MAKECMDGOALS)),)
@@ -20,3 +20,11 @@ update: ## Update configuration with latest upstream changes
 	git rebase upstream/main main; \
 	git rebase main master
 
+upgrade: ## Upgrade nvim to latest version
+	@if [ "$$(uname)" = 'Darwin' ]; then \
+		printf "This script is not supported on macOS. Please use Homebrew to upgrade Neovim.\n"; \
+		exit 0; \
+	fi; \
+	curl -LO --output-dir /tmp https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage; \
+	sudo mv /tmp/nvim-linux-x86_64.appimage /usr/local/bin/nvim.appimage; \
+	sudo chmod +x /usr/local/bin/nvim.appimage
