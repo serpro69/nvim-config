@@ -111,10 +111,12 @@ M.mason = {
     -- IaC, DevXp, DevOps
     "ansible-language-server",
     "ansible-lint",
+    "bash-language-server",
     -- "autotools-language-server",
     "dockerfile-language-server",
     "docker-compose-language-service",
     "shellcheck",
+    "shfmt",
     "terraform-ls",
     "tflint",
     -- "tfsec", -- replaced by trivy
