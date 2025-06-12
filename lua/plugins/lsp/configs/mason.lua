@@ -62,7 +62,20 @@ return {
               -- Load LSP Settings(If Exists)
               local ok_settings, settings = pcall(require, "plugins.lsp.settings." .. server)
               if ok_settings then
+                if server == "ts_ls" then -- for some reason ts_ls doesn't get these from the wildcard lsp config
+                  vim.lsp.config[server] = {
+                    capabilities = opts.capabilities,
+                    on_attach = opts.on_attach,
+                    on_init = opts.on_init,
+                  }
+                end
                 vim.lsp.config(server, settings)
+              else
+                vim.notify(
+                  string.format("LSP settings file for '%s' not found", server),
+                  vim.log.levels.WARN,
+                  { title = "LSP" }
+                )
               end
 
               -- Enable LSP
