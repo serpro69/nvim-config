@@ -2,6 +2,8 @@
 -- NOTE: Syntax Highlighting
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  build = ":TSUpdate",
   cmd = {
     "TSInstall",
     "TSUninstall",
@@ -27,7 +29,10 @@ return {
         },
       },
     },
-    "nvim-treesitter/nvim-treesitter-textobjects",
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main",
+    },
     {
       "nvim-treesitter/nvim-treesitter-context",
       init = function()

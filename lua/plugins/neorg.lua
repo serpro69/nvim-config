@@ -3,6 +3,7 @@
 return {
   "nvim-neorg/neorg",
   lazy = false,
+  enabled = false,
   version = "*",
   opts = {
     load = {
