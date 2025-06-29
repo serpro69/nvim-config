@@ -8,8 +8,8 @@ M.ai_models = {
   },
   -- https://ai.google.dev/gemini-api/docs/models
   gemini = {
-    flash = "gemini-2.5-flash-preview-04-17",
-    pro = "gemini-2.5-pro-preview-05-06",
+    flash = "gemini-2.5-flash",
+    pro = "gemini-2.5-pro",
   },
 }
 
