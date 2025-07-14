@@ -2,7 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "66b5c2707e624dcd2cd3605676c64a2efe47e9d1" },
   "NvChad": { "branch": "v2.5", "commit": "29ebe31ea6a4edf351968c76a93285e6e108ea08" },
   "actions-preview.nvim": { "branch": "master", "commit": "36513ad213855d497b7dd3391a24d1d75d58e36f" },
-  "avante.nvim": { "branch": "main", "commit": "c4ce24e3c047c3283652aeb9a16114603d6f705c" },
+  "avante.nvim": { "branch": "main", "commit": "0c6a8f5688cefb37259d3404f0403075e033a182" },
   "base46": { "branch": "v3.0", "commit": "93b52ce8a659fdebd69f15a3b8b3475a9cc6d6da" },
   "better-escape.nvim": { "branch": "master", "commit": "19a38aab94961016430905ebec30d272a01e9742" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
