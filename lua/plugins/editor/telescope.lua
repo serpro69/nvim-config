@@ -21,7 +21,18 @@ end
 -- NOTE: Fuzzy Finder
 return {
   "nvim-telescope/telescope.nvim",
-  enabled = false,
+  enabled = true,
+  dependencies = {
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      enabled = function()
+        return vim.fn.executable("make") == 1
+      end,
+    },
+    "debugloop/telescope-undo.nvim",
+    "nvim-lua/plenary.nvim",
+  },
   opts = {
     defaults = {
       prompt_prefix = "   ",
