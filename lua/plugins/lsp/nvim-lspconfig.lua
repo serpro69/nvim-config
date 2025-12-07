@@ -2,6 +2,9 @@
 -- NOTE: Neovim LSP Configuration
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    "aznhe21/actions-preview.nvim",
+  },
   opts = function(_, opts)
     local custom_path = "plugins.lsp.settings"
 
@@ -25,6 +28,23 @@ return {
       local ok, custom = pcall(require, custom_path .. "." .. server)
       if ok and type(custom) == "table" then
         opts.servers[server] = vim.tbl_deep_extend("force", opts.servers[server] or {}, custom)
+        opts.servers[server].keys = {
+          {
+            "<leader>ca",
+            function()
+              local ok_ap, ap = pcall(require, "actions-preview")
+              if not ok_ap then
+                vim.notify("Failed to load actions-preview plugin", vim.log.levels.ERROR, { title = "nvim-lspconfig" })
+                vim.lsp.buf.code_action()
+              else
+                ap.code_actions()
+              end
+            end,
+            desc = "Code Action",
+            mode = { "n", "x" },
+            has = "codeAction",
+          },
+        }
       end
     end
 
