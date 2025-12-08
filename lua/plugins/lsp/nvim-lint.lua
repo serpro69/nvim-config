@@ -49,16 +49,16 @@ return {
           return linter
         end,
 
-        trivy = function()
-          local linter = original.trivy
-          local root = root_dir(".terraform", "main.tf", ".git")
-          if root ~= nil then
-            linter.args = { "--scanners", "misconfig", "--format", "json", "fs", root }
-            -- linter.args = { "fs", "--scanners", "secret,misconfig", "--format", "json", root }
-          end
-
-          return linter
-        end,
+        -- trivy = function()
+        --   local linter = original.trivy
+        --   local root = root_dir(".terraform", "main.tf", ".git")
+        --   if root ~= nil then
+        --     linter.args = { "--scanners", "misconfig", "--format", "json", "fs", root }
+        --     -- linter.args = { "fs", "--scanners", "secret,misconfig", "--format", "json", root }
+        --   end
+        --
+        --   return linter
+        -- end,
       }
     end,
   },
