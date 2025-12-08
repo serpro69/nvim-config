@@ -7,10 +7,10 @@ return {
         -- tofu linter incorrectly detects the directory of the opened file,
         -- which results in errors for modules that it things are not installed
         -- See: https://github.com/LazyVim/LazyVim/issues/6851
-        -- terraform = { "tofu", "tflint", "trivy" },
-        -- tf = { "tofu", "tflint", "trivy" },
-        terraform = { "tflint", "trivy" },
-        tf = { "tflint", "trivy" },
+        terraform = { "tofu", "tflint", "trivy" },
+        tf = { "tofu", "tflint", "trivy" },
+        -- terraform = { "tflint", "trivy" },
+        -- tf = { "tflint", "trivy" },
       },
     },
   },
