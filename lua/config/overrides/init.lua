@@ -1,0 +1,12 @@
+-- Personal overrides (late)
+-- Loaded at the end of init.lua, after all plugins
+--
+-- Structure mirrors lua/config/ for clarity:
+--   overrides/globals.lua  -> loaded early in init.lua (before plugins)
+--   overrides/keymaps.lua  -> overrides for config/keymaps.lua
+--   overrides/autocmds.lua -> overrides for config/autocmds.lua
+--   etc.
+
+-- Add your late overrides here:
+-- require("config.overrides.keymaps")
+-- require("config.overrides.autocmds")

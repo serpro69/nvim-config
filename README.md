@@ -244,18 +244,20 @@ Edit `lazyvim.json` in your config root and remove unwanted extras from the list
 
 #### Changing Colorscheme
 
-To change the colorscheme, edit `lua/config/globals.lua` and modify the `vim.g.colorscheme` value:
+To change the colorscheme, modify `vim.g.colorscheme`:
 
 Available themes:
 
-- `tokyonight` - Default modern dark theme
-- `nvchad` - Base46 NvChad themes
+- `tokyonight` - Modern dark theme with lualine/bufferline
+- `nvchad` - Base46 NvChad themes with NvChad statusline/tabufline
 
-Example:
+**For fork maintainers**, use `lua/config/overrides/globals.lua` to avoid merge conflicts:
 
 ```lua
-vim.g.colorscheme = "tokyonight"  -- Switch theme
+vim.g.colorscheme = "tokyonight"
 ```
+
+**For direct modification**, edit `lua/config/globals.lua`.
 
 ### Performance Optimizations
 
@@ -292,6 +294,7 @@ The following plugins are intentionally disabled to avoid conflicts:
 │   └── install_requirements.ps1
 ├── lua/
 │   ├── config/         # Core configuration (options, keymaps, autocmds)
+│   │   ├── overrides/  # Personal overrides (for fork maintainers)
 │   │   ├── statusline/ # Custom statusline configuration
 │   │   └── tabufline/  # Tabline configuration
 │   ├── plugins/        # Plugin configurations
@@ -344,6 +347,32 @@ The following plugins are intentionally disabled to avoid conflicts:
 - opencode plugins (using Supermaven instead)
 
 ## Customization Guide
+
+### Personal Overrides (For Fork Maintainers)
+
+If you maintain a fork of this config, use the `lua/config/overrides/` directory to keep your customizations separate from upstream. This minimizes merge conflicts when rebasing.
+
+```text
+lua/config/overrides/
+├── init.lua      # Late overrides (keymaps, autocmds) - loaded after plugins
+└── globals.lua   # Early overrides (colorscheme, providers) - loaded at end of globals.lua
+```
+
+**Early overrides** (`globals.lua`) - loaded at the end of `config/globals.lua`, before plugins are configured:
+
+```lua
+-- lua/config/overrides/globals.lua
+vim.g.colorscheme = "tokyonight"
+vim.g.ai_cmp = true
+```
+
+**Late overrides** (`init.lua`) - loaded at the end of `init.lua`, after all plugins:
+
+```lua
+-- lua/config/overrides/init.lua
+require("config.overrides.keymaps")   -- if needed
+require("config.overrides.autocmds")  -- if needed
+```
 
 ### Adding New Plugins
 
