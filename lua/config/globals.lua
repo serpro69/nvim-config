@@ -53,3 +53,6 @@ vim.g.ai_cmp = false
 
 -- Environment-specific settings
 require("config.env")
+
+-- Personal overrides for globals (load last to override defaults above)
+pcall(require, "config.overrides.globals")
