@@ -3,6 +3,7 @@
 return {
   "adalessa/laravel.nvim",
   event = "VeryLazy",
+  enabled = false,
   keys = {
     {
       "<leader>cLl",
