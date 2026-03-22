@@ -94,7 +94,7 @@ autocmd("FileChangedShellPost", {
 -- Equalize Split Sizes on Resize
 -- --------------------------------------------------------------------
 -- Keeps all split windows evenly sized when resizing the Neovim window.
-autocmd("VimResized", {
+autocmd({ "VimResized", "WinClosed" }, {
   callback = function()
     vim.cmd("wincmd =")
   end,
