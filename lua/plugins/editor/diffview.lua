@@ -2,7 +2,7 @@
 -- NOTE: Show Git Diff
 return {
   "sindrets/diffview.nvim",
-  event = { "BufReadPost", "BufNewFile" },
+  event = "VeryLazy",
   cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
   opts = {
 
