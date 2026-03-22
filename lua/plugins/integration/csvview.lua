@@ -18,7 +18,17 @@ return {
       jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
     },
   },
-  cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+  ft = { "csv", "tsv" },
+  config = function()
+    local autocmd = vim.api.nvim_create_autocmd
+
+    autocmd("FileType", {
+      pattern = "csv",
+      callback = function()
+        vim.cmd("CsvViewEnable display_mode=border header_lnum=1")
+      end,
+    })
+  end,
   keys = {
     {
       "<leader>uv",
