@@ -4,9 +4,15 @@ return {
   {
     "joryeugene/dadbod-grip.nvim",
     version = "*",
-    -- plugin's lazy.lua is incompatible with lazy.nvim pkg system
     build = function(plugin)
-      os.remove(plugin.dir .. "/lazy.lua")
+      local path = plugin.dir .. "/lazy.lua"
+      local f = io.open(path, "w")
+      if f then
+        f:write("return {}\n")
+        f:close()
+      end
+      vim.fn.system({ "git", "-C", plugin.dir, "update-index", "--assume-unchanged", "lazy.lua" })
+      os.remove(vim.fn.stdpath("state") .. "/lazy/pkg-cache.lua")
     end,
     opts = {
       completion = false,
