@@ -2,7 +2,7 @@
 -- ref: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#customize-built-in-linters
 local original = {
   tofu = require("lint").linters.tofu,
-  trivy = require("lint").linters.trivy,
+  -- trivy = require("lint").linters.trivy,
 }
 
 local root_dir = function(...)
@@ -30,8 +30,8 @@ return {
         --      https://github.com/mfussenegger/nvim-lint/issues/885
         -- terraform = { "tofu", "tflint", "trivy" },
         -- tf = { "tofu", "tflint", "trivy" },
-        terraform = { "tflint", "trivy" },
-        tf = { "tflint", "trivy" },
+        terraform = { "tflint" },
+        tf = { "tflint" },
       }
       opts.linters = {
         tofu = function()
