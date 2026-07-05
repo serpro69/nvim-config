@@ -3,7 +3,6 @@
 return {
   {
     "sudo-tee/opencode.nvim",
-    enabled = false,
     event = "VeryLazy",
     opts = {
       ui = {
