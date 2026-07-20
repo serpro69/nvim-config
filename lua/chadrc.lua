@@ -8,7 +8,7 @@ local M = {}
 local highlights = require("highlights")
 
 M.base46 = {
-  theme = "gruvchad",
+  theme = "kanagawa-dragon",
   transparency = false,
   hl_override = highlights.override,
   hl_add = highlights.add,
@@ -40,7 +40,8 @@ M.ui = {
     modules = require("config.statusline").modules,
   },
   tabufline = {
-    enabled = vim.g.colorscheme == "nvchad",
+    -- enabled = vim.g.colorscheme == "nvchad",
+    enabled = false,
     lazyload = true,
     order = { "treeOffset", "buffers", "tabs", "btns" },
     modules = require("config.tabufline").modules,
