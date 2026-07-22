@@ -254,3 +254,13 @@ autocmd("FileType", {
   desc = "Attach keymaps for quickfix list",
   group = general,
 })
+
+-- Disable Tabline
+autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    vim.opt.showtabline = 0
+  end,
+  group = general,
+  desc = "Disable tabline",
+})
