@@ -474,36 +474,46 @@ M.bootstrap_project = function()
             end
 
             local selected_deps = {}
+            local function proceed_with_deps()
+              local deps_str = table.concat(selected_deps, ",")
+              local cmd = string.format(
+                "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
+                name,
+                name,
+                type_flag,
+                java_flag,
+                deps_str ~= "" and deps_str or "web",
+                name,
+                name,
+                name,
+                name,
+                name
+              )
+              run_in_terminal(dir, cmd, "  Creating Spring Boot project '" .. name .. "'...")
+              finalize_project(target_path, selected.name, name)
+            end
+
             local function pick_dependencies()
+              local available = vim.tbl_filter(function(d)
+                return not vim.tbl_contains(selected_deps, d.id)
+              end, deps)
+              if #available == 0 then
+                proceed_with_deps()
+                return
+              end
               local count = #selected_deps
               local prompt_str = count > 0
                 and string.format("  Dependencies (%d selected) — pick another or ESC to finish", count)
                 or "  Select dependencies (pick one, ESC when done)"
               vim.ui.select(
-                deps,
+                available,
                 { prompt = prompt_str, format_item = function(d) return d.label end },
                 function(choice)
                   if choice then
                     table.insert(selected_deps, choice.id)
                     pick_dependencies()
                   else
-                    local deps_str = table.concat(selected_deps, ",")
-
-                    local cmd = string.format(
-                      "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
-                      name,
-                      name,
-                      type_flag,
-                      java_flag,
-                      deps_str ~= "" and deps_str or "web",
-                      name,
-                      name,
-                      name,
-                      name,
-                      name
-                    )
-                    run_in_terminal(dir, cmd, "  Creating Spring Boot project '" .. name .. "'...")
-                    finalize_project(target_path, selected.name, name)
+                    proceed_with_deps()
                   end
                 end
               )
