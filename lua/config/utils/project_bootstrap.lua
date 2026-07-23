@@ -236,6 +236,12 @@ M.bootstrap_project = function()
           ready = vim.fn.isdirectory(path) == 1
         end
 
+        if not ready and framework == "Spring Boot" then
+          ready = vim.fn.filereadable(path .. "/pom.xml") == 1
+            or vim.fn.filereadable(path .. "/build.gradle") == 1
+            or vim.fn.filereadable(path .. "/build.gradle.kts") == 1
+        end
+
         if ready then
           vim.schedule(function()
             vim.notify("  Project ready: " .. path, vim.log.levels.INFO)
@@ -413,27 +419,42 @@ M.bootstrap_project = function()
             type_flag = "-d type=gradle-project"
           end
 
-          -- IntelliJ Style Step: Select Java Target Runtime
-          vim.ui.select({ "25", "21", "17" }, { prompt = "  Select Java Version:" }, function(java_version)
+          vim.notify("  Fetching available Spring Boot metadata...", vim.log.levels.INFO)
+
+          local ok, metadata_json = pcall(function()
+            return vim.fn.system("curl -sf https://start.spring.io/metadata/client")
+          end)
+          if not ok or metadata_json == "" then
+            vim.notify("  Failed to fetch Spring Boot metadata!", vim.log.levels.ERROR)
+            return
+          end
+
+          local ok2, metadata = pcall(vim.fn.json_decode, metadata_json)
+          if not ok2 or not metadata then
+            vim.notify("  Could not parse Spring Boot metadata.", vim.log.levels.ERROR)
+            return
+          end
+
+          local java_versions = {}
+          if metadata.javaVersion and metadata.javaVersion.values then
+            for _, v in ipairs(metadata.javaVersion.values) do
+              table.insert(java_versions, v.id)
+            end
+          end
+          if #java_versions == 0 then
+            java_versions = { "21", "17" }
+          end
+
+          vim.ui.select(java_versions, { prompt = "  Select Java Version:" }, function(java_version)
             if not java_version then
               return
             end
             local java_flag = "-d javaVersion=" .. java_version
 
             vim.notify("  Selected " .. build_tool .. " with Java " .. java_version, vim.log.levels.INFO)
-            vim.notify("  Fetching available Spring Boot dependencies...", vim.log.levels.INFO)
 
-            local ok, metadata_json = pcall(function()
-              return vim.fn.system("curl -s https://start.spring.io/metadata/client")
-            end)
-            if not ok or metadata_json == "" then
-              vim.notify("  Failed to fetch Spring Boot metadata!", vim.log.levels.ERROR)
-              return
-            end
-
-            local ok2, metadata = pcall(vim.fn.json_decode, metadata_json)
-            if not ok2 or not metadata or not metadata.dependencies then
-              vim.notify("  Could not parse Spring Boot metadata.", vim.log.levels.ERROR)
+            if not metadata.dependencies or not metadata.dependencies.values then
+              vim.notify("  No dependencies found in Spring Boot metadata.", vim.log.levels.ERROR)
               return
             end
 
@@ -454,26 +475,22 @@ M.bootstrap_project = function()
 
             local selected_deps = {}
             local function pick_dependencies()
+              local count = #selected_deps
+              local prompt_str = count > 0
+                and string.format("  Dependencies (%d selected) — pick another or ESC to finish", count)
+                or "  Select dependencies (pick one, ESC when done)"
               vim.ui.select(
-                vim.tbl_map(function(d)
-                  return d.label
-                end, deps),
-                { prompt = "  Select dependencies (Enter to confirm, ESC when done)", kind = "multi" },
+                deps,
+                { prompt = prompt_str, format_item = function(d) return d.label end },
                 function(choice)
                   if choice then
-                    local dep = vim.tbl_filter(function(d)
-                      return d.label == choice
-                    end, deps)[1]
-                    if dep then
-                      table.insert(selected_deps, dep.id)
-                    end
+                    table.insert(selected_deps, choice.id)
                     pick_dependencies()
                   else
                     local deps_str = table.concat(selected_deps, ",")
 
-                    -- Injected type_flag and java_flag values directly into the zip initialization
                     local cmd = string.format(
-                      "mkdir %s && cd %s && curl -s https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
+                      "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
                       name,
                       name,
                       type_flag,
