@@ -34,14 +34,14 @@ M.bootstrap_project = function()
       },
     },
     {
-      name = "  Rust Ecosystem",
+      name = "  Rust",
       items = {
         { name = "󰣆  Plain Binary (Application)", cmd = "cargo new --bin $project_name" },
         { name = "  Plain Library", cmd = "cargo new --lib $project_name" },
       },
     },
     {
-      name = "󰟓  Go Ecosystem",
+      name = "󰟓  Go",
       items = {
         {
           name = "󰟓  Go Module (CLI/App)",
@@ -50,7 +50,7 @@ M.bootstrap_project = function()
       },
     },
     {
-      name = "  C/C++ Ecosystem",
+      name = "  C/C++",
       items = {
         {
           name = "  Plain C (Makefile)",
@@ -63,7 +63,7 @@ M.bootstrap_project = function()
       },
     },
     {
-      name = "  Java Ecosystem",
+      name = "  Java",
       items = {
         {
           name = "  Plain Java (Maven)",
@@ -357,7 +357,7 @@ M.bootstrap_project = function()
     end
 
     -- Rust Custom Handling
-    if category.name:find("Rust Ecosystem") then
+    if category.name:find("Rust") then
       run_in_terminal(
         dir,
         selected.cmd:gsub("$project_name", name),
@@ -368,7 +368,7 @@ M.bootstrap_project = function()
     end
 
     -- Go Custom Handling
-    if category.name:find("Go Ecosystem") then
+    if category.name:find("Go") then
       run_in_terminal(
         dir,
         selected.cmd:gsub("$project_name", name),
@@ -379,7 +379,7 @@ M.bootstrap_project = function()
     end
 
     -- C / C++ Custom Handling
-    if category.name:find("C/C++ Ecosystem") then
+    if category.name:find("C/C++") then
       run_in_terminal(
         dir,
         selected.cmd:gsub("$project_name", name),
@@ -389,8 +389,8 @@ M.bootstrap_project = function()
       return
     end
 
-    -- Java Ecosystem Custom Handling
-    if category.name:find("Java Ecosystem") and not selected.name:find("Spring Boot") then
+    -- Java Custom Handling
+    if category.name:find("Java") and not selected.name:find("Spring Boot") then
       run_in_terminal(
         dir,
         selected.cmd:gsub("$project_name", name),
