@@ -492,7 +492,7 @@ M.bootstrap_project = function()
                   return
                 end
 
-                local group_id = "com." .. name
+                local group_id = "com."
                 local artifact_id = name
                 local package_name = group_id .. "." .. name
                 local use_yaml = false
