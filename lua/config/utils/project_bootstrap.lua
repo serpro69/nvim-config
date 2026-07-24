@@ -453,29 +453,18 @@ M.bootstrap_project = function()
 
             vim.notify("  Selected " .. build_tool .. " with Java " .. java_version, vim.log.levels.INFO)
 
-            if not metadata.dependencies or not metadata.dependencies.values then
-              vim.notify("  No dependencies found in Spring Boot metadata.", vim.log.levels.ERROR)
-              return
-            end
+            local spring_deps = require("config.utils.spring_deps")
 
-            local deps = {}
-            for _, group in ipairs(metadata.dependencies.values) do
-              for _, dep in ipairs(group.values or {}) do
-                table.insert(deps, {
-                  label = string.format("%-25s — %s", dep.id, dep.name or dep.description or ""),
-                  id = dep.id,
-                })
-              end
-            end
-
-            if #deps == 0 then
+            local all_deps = spring_deps.list_dependencies(metadata)
+            if #all_deps == 0 then
               vim.notify("  No dependencies found from Spring Initializr!", vim.log.levels.WARN)
               return
             end
 
-            local selected_deps = {}
-            local function proceed_with_deps()
-              local deps_str = table.concat(selected_deps, ",")
+            local selected_ids = {}
+
+            local function proceed()
+              local deps_str = table.concat(selected_ids, ",")
               local cmd = string.format(
                 "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
                 name,
@@ -491,35 +480,42 @@ M.bootstrap_project = function()
               )
               run_in_terminal(dir, cmd, "  Creating Spring Boot project '" .. name .. "'...")
               finalize_project(target_path, selected.name, name)
+
+              if #selected_ids > 0 then
+                vim.defer_fn(function()
+                  spring_deps.save_project_deps(selected_ids, all_deps, target_path)
+                end, 5000)
+              end
             end
 
-            local function pick_dependencies()
-              local available = vim.tbl_filter(function(d)
-                return not vim.tbl_contains(selected_deps, d.id)
-              end, deps)
-              if #available == 0 then
-                proceed_with_deps()
+            local function pick()
+              local remaining = vim.tbl_filter(function(d)
+                return not vim.tbl_contains(selected_ids, d.id)
+              end, all_deps)
+              if #remaining == 0 then
+                proceed()
                 return
               end
-              local count = #selected_deps
-              local prompt_str = count > 0
+              local count = #selected_ids
+              local prompt = count > 0
                 and string.format("  Dependencies (%d selected) — pick another or ESC to finish", count)
                 or "  Select dependencies (pick one, ESC when done)"
-              vim.ui.select(
-                available,
-                { prompt = prompt_str, format_item = function(d) return d.label end },
-                function(choice)
-                  if choice then
-                    table.insert(selected_deps, choice.id)
-                    pick_dependencies()
-                  else
-                    proceed_with_deps()
-                  end
+              vim.ui.select(remaining, {
+                prompt = prompt,
+                format_item = function(d)
+                  return string.format("%-25s — %s", d.id, d.description ~= "" and d.description or d.name)
+                end,
+              }, function(choice)
+                if choice then
+                  table.insert(selected_ids, choice.id)
+                  pick()
+                else
+                  proceed()
                 end
-              )
+              end)
             end
 
-            pick_dependencies()
+            pick()
           end)
         end
       )
