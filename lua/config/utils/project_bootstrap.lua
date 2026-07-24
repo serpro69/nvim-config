@@ -321,7 +321,7 @@ M.bootstrap_project = function()
       end
 
       -- Clear layouts / wipe any existing Alpha dashboards out before jumping to your code
-      vim.cmd("only")
+      pcall(function() vim.cmd("only") end)
 
       if target_entry then
         vim.cmd("edit " .. vim.fn.fnameescape(target_entry))
@@ -414,7 +414,7 @@ M.bootstrap_project = function()
           if build_tool == "Maven" then
             type_flag = "-d type=maven-project"
           elseif build_tool == "Gradle (Kotlin)" then
-            type_flag = "-d type=gradle-kotlin-dsl"
+            type_flag = "-d type=gradle-project-kotlin"
           elseif build_tool == "Gradle (Groovy)" then
             type_flag = "-d type=gradle-project"
           end
@@ -502,8 +502,8 @@ M.bootstrap_project = function()
                   use_yaml = config_fmt == "yaml"
 
                   vim.ui.input({ prompt = "Group ID:", default = group_id }, function(gid)
-                    if not gid then return end
-                    group_id = gid
+                    if not gid or gid == "" then return end
+                    group_id = gid:gsub("%.+$", "")
                     package_name = group_id .. "." .. name
 
                     local selected_ids = {}
