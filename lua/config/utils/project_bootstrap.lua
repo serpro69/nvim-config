@@ -461,64 +461,83 @@ M.bootstrap_project = function()
               return
             end
 
-            local selected_ids = {}
+            local group_id = "com." .. name
+            local artifact_id = name
+            local package_name = group_id
 
-            local function proceed()
-              local deps_str = table.concat(selected_ids, ",")
-              local cmd = string.format(
-                "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d packageName=com.%s -o %s.zip && unzip %s.zip && rm %s.zip",
-                name,
-                name,
-                type_flag,
-                java_flag,
-                deps_str ~= "" and deps_str or "web",
-                name,
-                name,
-                name,
-                name,
-                name
-              )
-              run_in_terminal(dir, cmd, "  Creating Spring Boot project '" .. name .. "'...")
-              finalize_project(target_path, selected.name, name)
+            vim.ui.input({ prompt = "Group ID:", default = group_id }, function(gid)
+              if not gid then return end
+              group_id = gid
+              vim.ui.input({ prompt = "Artifact ID:", default = artifact_id }, function(aid)
+                if not aid then return end
+                artifact_id = aid
+                vim.ui.input({ prompt = "Package name:", default = group_id }, function(pkg)
+                  if not pkg then return end
+                  package_name = pkg
 
-              if #selected_ids > 0 then
-                vim.defer_fn(function()
-                  spring_deps.save_project_deps(selected_ids, all_deps, target_path)
-                end, 5000)
-              end
-            end
+                  local selected_ids = {}
 
-            local function pick()
-              local remaining = vim.tbl_filter(function(d)
-                return not vim.tbl_contains(selected_ids, d.id)
-              end, all_deps)
-              if #remaining == 0 then
-                proceed()
-                return
-              end
-              local count = #selected_ids
-              local prompt = count > 0
-                and string.format("  Dependencies (%d selected) — pick another or ESC to finish", count)
-                or "  Select dependencies (pick one, ESC when done)"
-              vim.ui.select(remaining, {
-                prompt = prompt,
-                format_item = function(d)
-                  return string.format("%-25s — %s", d.id, d.description ~= "" and d.description or d.name)
-                end,
-              }, function(choice)
-                if choice then
-                  table.insert(selected_ids, choice.id)
+                  local function proceed()
+                    local deps_str = table.concat(selected_ids, ",")
+                    local cmd = string.format(
+                      "mkdir %s && cd %s && curl -sf https://start.spring.io/starter.zip %s %s -d dependencies=%s -d name=%s -d groupId=%s -d artifactId=%s -d packageName=%s -o %s.zip && unzip %s.zip && rm %s.zip",
+                      name,
+                      name,
+                      type_flag,
+                      java_flag,
+                      deps_str ~= "" and deps_str or "web",
+                      name,
+                      group_id,
+                      artifact_id,
+                      package_name,
+                      name,
+                      name,
+                      name
+                    )
+                    run_in_terminal(dir, cmd, "  Creating Spring Boot project '" .. name .. "'...")
+                    finalize_project(target_path, selected.name, name)
+
+                    if #selected_ids > 0 then
+                      vim.defer_fn(function()
+                        spring_deps.save_project_deps(selected_ids, all_deps, target_path)
+                      end, 5000)
+                    end
+                  end
+
+                  local function pick()
+                    local remaining = vim.tbl_filter(function(d)
+                      return not vim.tbl_contains(selected_ids, d.id)
+                    end, all_deps)
+                    if #remaining == 0 then
+                      proceed()
+                      return
+                    end
+                    local count = #selected_ids
+                    local prompt = count > 0
+                      and string.format("  Dependencies (%d selected) — pick another or ESC to finish", count)
+                      or "  Select dependencies (pick one, ESC when done)"
+                    vim.ui.select(remaining, {
+                      prompt = prompt,
+                      format_item = function(d)
+                        return string.format("%-25s — %s", d.id, d.description ~= "" and d.description or d.name)
+                      end,
+                    }, function(choice)
+                      if choice then
+                        table.insert(selected_ids, choice.id)
+                        pick()
+                      else
+                        proceed()
+                      end
+                    end)
+                  end
+
                   pick()
-                else
-                  proceed()
-                end
-              end)
-            end
-
-            pick()
-          end)
-        end
-      )
+                end) -- package name input
+              end) -- artifact id input
+            end) -- group id input
+          end) -- java version select
+        end -- build_tool function
+      ) -- build_tool vim.ui.select
       return
     end
 
