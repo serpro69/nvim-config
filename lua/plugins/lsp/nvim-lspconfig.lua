@@ -8,6 +8,7 @@ return {
     local disabled_servers = {
       "phpactor",
       "rust_analyzer",
+      "omnisharp",
       -- add more if needed
     }
 
