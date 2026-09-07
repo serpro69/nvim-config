@@ -25,3 +25,11 @@ After sync, resolve any rebase conflicts in `master` and run `:Lazy sync` in neo
 ## Known workarounds
 
 - `dadbod-grip.nvim`: plugin ships a broken `lazy.lua` (nameless spec fragment). The `build` hook in `lua/plugins/integration/dadbod-grip.lua` overwrites it with an empty spec, marks it `--assume-unchanged` in git, and clears the pkg cache. If Lazy reports local changes for this plugin after sync, run `:Lazy build dadbod-grip.nvim`.
+
+# capy — context-window routing
+
+@.capy/AGENTS.md
+
+
+@.claude/CLAUDE.extra.md
+@.claude/toolbox/CLAUDE.md

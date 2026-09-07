@@ -1,3 +1,19 @@
+# ignore all hidden
+.*
+# except
+!.gitattributes
+!.gitignore
+!.gitmodules
+!.github
+!.github/**
+!.yamlfmt.yaml
+!.yamllint.yml
+!.mcp.json
+!.capy.toml
+!.sessions/
+!.arc.yml
+!docs/**/.files
+
 tt.*
 .tests
 doc/tags
@@ -6,3 +22,12 @@ debug
 foo.*
 *.log
 data
+
+# AI
+!.codex
+!.claude
+.claude/worktrees
+
+.capy/**
+!.capy
+!.capy/AGENTS.md
