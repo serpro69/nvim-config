@@ -1,8 +1,8 @@
 {
   "schema_version": "1",
   "upstream_repo": "serpro69/claude-toolbox",
-  "template_version": "4b4a9e08961833ef5b3b427b03e97149c082c80b",
-  "synced_at": "2026-09-07T14:50:42Z",
+  "template_version": "7aa0afa96af5f2aeb2742379ce92d0cb779c4cd8",
+  "synced_at": "2026-09-24T07:58:34Z",
   "variables": {
     "PROJECT_NAME": "nvim-config",
     "LANGUAGES": "lua",
