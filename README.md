@@ -401,6 +401,12 @@ require("config.overrides.autocmds")  -- if needed
 - **LSP not starting**: Verify language server is installed and configured
 - **Theme issues**: Ensure terminal supports true colors (24-bit)
 - **Performance**: Check for heavy plugins or large files
+- **Markdown previews switch pickers inside tmux**: Snacks image support is explicitly
+  disabled inside tmux. With `extended-keys always`, its terminal capability probe can
+  leak replies as keystrokes, causing `E21` errors or opening Recent Files. Markdown
+  text highlighting still works. Remove the workaround in `lua/plugins/ui/snacks.lua`
+  once Snacks handles `always` in its extended-key workaround
+  ([upstream issue](https://github.com/folke/snacks.nvim/issues/2332)).
 
 ### Getting Help
 
